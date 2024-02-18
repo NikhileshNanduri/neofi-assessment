@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "468a4304-1fa3-477d-97b1-570b58d0b5fd",
+		"name": "Endpoints",
+		"description": "- **POST /api/signup: Register a new user.**\n    \n\nSample Body\n\n`{ \"username\":\"user1\", \"email\" : \"user1@test.com\",\" password\" : \"neofiuser1\" }`\n\nExpected Response\n\n`{ \"token\": \"cb8aaf633e0e4a387bdc3051770300844ac24075\"}`\n\n- **POST /api/login: Log in an existing user.**\n    \n\nSample Body\n\n`{\"username\":\"user1\",\"email\" : \"user1@test.com\",\"password\" : \"neofiuser1\"}`\n\nExpected Response\n\n`{ \"token\": \"cb8aaf633e0e4a387bdc3051770300844ac24075\"}`\n\n- **POST /api/notes/create/: Create a new note.**\n    \n\nSample Body\n\n`{ \"content\" : \"This is Note Version 1\"}`\n\nExpected Response\n\n`{ \"id\": 7, \"owner\": { \"id\": 4, \"username\": \"user7\", \"email\": \"user7@test.com\" }, \"content\": \"This is Note Version 1\", \"shared_with\": [], \"created_at\": \"2024-02-18T19:49:33.027228Z\"}`\n\n- **GET /api/notes//: Retrieve a specific note.**\n    \n\n{ \"id\": 7, \"owner\": { \"id\": 4, \"username\": \"user7\", \"email\": \"[user7@test.com](https://mailto:user7@test.com)\" }, \"content\": \"This is Note Version 1\", \"shared_with\": \\[ 1 \\], \"created_at\": \"2024-02-18T19:49:33.027228Z\"}\n\n- **POST /api/notes/share/: Share a note with other users.**\n    \n\nSample Body\n\n`{ \"note_id\" : 7, \"shared_users\" : [1]}`\n\nExpected Response\n\n`{ \"message\": \"Note shared successfully\"}`\n\n- **PUT /api/notes//update/: Update a note.**\n    \n\nSample Body\n\n`{ \"content\" : \"Notes Version 78112\"}`\n\nExpected Response\n\n`{ \"id\": 7, \"owner\": { \"id\": 4, \"username\": \"user7\", \"email\": \"user7@test.com\" }, \"content\": \"Notes Version 78112\", \"shared_with\": [ 1 ], \"created_at\": \"2024-02-18T19:49:33.027228Z\"}`\n\n- **GET /api/notes/version-history//: Get version history of a note.**\n    \n\nSample Body\n\nExpected Response\n\n`[{   \"id\": 21,   \"note\": 7,   \"timestamp\": \"2024-02-18T19:52:22.821870Z\",   \"user\": 4,   \"content\": \"Notes Version 781Notes Version 78112\"   },   { \"   id\": 20,   \"note\": 7,   \"timestamp\": \"2024-02-18T19:51:55.410581Z\",   \"user\": 1,   \"content\": \"This is Note Version 1Notes Version 781\"   },   {   \"id\": 19,   \"note\": 7,   \"timestamp\": \"2024-02-18T19:49:33.031825Z\",   \"user\": 4,   \"content\": \"This is Note Version 1\"   }]`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9007909"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"user7\",\n\"email\" : \"user7@test.com\",\n\"password\" : \"neofiuser1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/signup/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"user1\",\n\"email\" : \"user1@test.com\",\n\"password\" : \"neofiuser1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/login/?",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"login",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Note",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cb8aaf633e0e4a387bdc3051770300844ac24075",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\" : \"This is Note Version 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/notes/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"notes",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Note",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 8b2d3cc99ed5b4ce62f01fc581a31839879f57e4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/notes/7",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"notes",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Share Note",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cb8aaf633e0e4a387bdc3051770300844ac24075",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"note_id\" : 7,\n    \"shared_users\" : [1]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/notes/share/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"notes",
+						"share",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cb8aaf633e0e4a387bdc3051770300844ac24075",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\" : \"Notes Version 78112\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/notes/7/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"notes",
+						"7",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Version History",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cb8aaf633e0e4a387bdc3051770300844ac24075",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/notes/version-history/7",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"notes",
+						"version-history",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
